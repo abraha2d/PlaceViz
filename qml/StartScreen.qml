@@ -2,13 +2,12 @@ import QtQuick 2.0
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.14
 
-Rectangle {
+ApplicationWindow {
     SystemPalette {
         id: myPalette
         colorGroup: SystemPalette.Active
     }
 
-    id: appWindow
     width: 640
     height: 360
     color: myPalette.window
@@ -22,6 +21,7 @@ Rectangle {
 
             Text {
                 text: qsTr("PlaceViz")
+                color: myPalette.text
 
                 font.family: "Ubuntu"
                 font.pixelSize: 48
@@ -32,6 +32,7 @@ Rectangle {
 
             Text {
                 text: qsTr("A placement visualizer")
+                color: myPalette.text
 
                 font.family: "Ubuntu"
                 font.pixelSize: 16
@@ -45,6 +46,7 @@ Rectangle {
 
             Text {
                 text: qsTr("Created by Kevin Abraham<br>and Himanshu Yadav")
+                color: myPalette.text
 
                 font.family: "Ubuntu"
                 font.pixelSize: 16
@@ -61,18 +63,20 @@ Rectangle {
 
             Text {
                 text: qsTr("Benchmarks")
+                color: myPalette.text
 
                 font.family: "Ubuntu"
                 font.pixelSize: 16
 
                 Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: 8
             }
 
             RowLayout {
                 spacing: 0
 
                 Rectangle {
-                    color: "LightGray"
+                    color: myPalette.light
 
                     width: 1
                     Layout.fillHeight: true
@@ -85,33 +89,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    model: ListModel {
-                        ListElement {
-                            name: "biomedP"
-                            path: "benchmarks/biomedP.hgr"
-                            placed: false
-                        }
-                        ListElement {
-                            name: "industry2"
-                            path: "benchmarks/industry2.hgr"
-                            placed: false
-                        }
-                        ListElement {
-                            name: "industry3"
-                            path: "benchmarks/industry3.hgr"
-                            placed: true
-                        }
-                        ListElement {
-                            name: "p2"
-                            path: "benchmarks/p2.hgr"
-                            placed: false
-                        }
-                        ListElement {
-                            name: "structP"
-                            path: "benchmarks/structP.hgr"
-                            placed: true
-                        }
-                    }
+                    model: benchmarkList
 
                     delegate: Item {
                         height: benchmarkButton.height - 1
@@ -122,19 +100,20 @@ Rectangle {
                         Button {
                             id: benchmarkButton
                             height: 49
+                            onClicked: controller.benchmarkClicked(model.benchmark)
 
                             anchors.left: parent.left
                             anchors.right: parent.right
 
                             background: Rectangle {
-                                color: benchmarkButton.down ? "LightGray" : "transparent"
-                                border.color: "LightGray"
+                                color: benchmarkButton.down ? myPalette.light : benchmarkButton.hovered ? myPalette.mid : "transparent"
+                                border.color: myPalette.light
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: benchmarkStatus
-                                color: placed ? "green" : "red"
+                                color: model.benchmark.isOther ? "transparent" : model.benchmark.isPlaced ? "green" : "red"
                                 width: 4
 
                                 anchors {
@@ -147,7 +126,8 @@ Rectangle {
 
                             Text {
                                 id: benchmarkName
-                                text: name
+                                text: model.benchmark.name
+                                color: myPalette.text
 
                                 anchors {
                                     top: parent.top
@@ -159,8 +139,8 @@ Rectangle {
 
                             Text {
                                 id: benchmarkPath
-                                text: path
-                                color: "gray"
+                                text: model.benchmark.path
+                                color: myPalette.dark
 
                                 anchors {
                                     top: benchmarkName.bottom
