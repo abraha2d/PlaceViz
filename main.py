@@ -1,4 +1,5 @@
 # This Python file uses the following encoding: utf-8
+from os.path import basename
 import sys
 
 from PySide2.QtCore import (
@@ -89,15 +90,15 @@ class Controller(QObject):
             if result[0] == -1:
                 QMessageBox.critical(
                     None,
-                    "Error",
-                    f"Could not load benchmark. Reason: {result[1]}",
+                    f"{basename(path)}",
+                    f"Could not load benchmark.\n\nReason: {result[1]}",
                 )
 
             elif result[0] == -2:
                 run_placement = QMessageBox.question(
                     None,
-                    f"{path}",
-                    "This benchmark has not been placed yet. Would you like to run placement?",
+                    f"{basename(path)}",
+                    "This benchmark has not been placed yet.\n\nWould you like to run placement?",
                 )
 
                 if run_placement == QMessageBox.StandardButton.Yes:
