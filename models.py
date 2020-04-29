@@ -12,6 +12,11 @@ class Cell:
         self.id = id
         self.width, self.height, self.power = cell_data
 
+    @property
+    def cloc(self):
+        x, y = self.loc
+        return (x + self.width / 2., y + self.height / 2.)
+
 
 class IOCell(Cell):
     loc_pref = None         # Preferred (x, y) boundary location

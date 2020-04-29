@@ -46,7 +46,7 @@ def parse_hgr(hgr_file):
 
         nets = []
         for i in range(num_nets):
-            net = Net(i, integerify(hgr.readline().split()))
+            net = Net(i+1, integerify(hgr.readline().split()))
             nets.append(net)
 
         return num_cells, nets
@@ -58,7 +58,7 @@ def parse_dim(dim_file, num_cells):
 
         cells = []
         for i in range(num_cells):
-            cell = Cell(i, floatify(dim.readline().split(",")))
+            cell = Cell(i+1, floatify(dim.readline().split(",")))
             cells.append(cell)
 
         return core, cells
@@ -83,8 +83,7 @@ def parse_csv(csv_file, cells):
 
         for line in csv:
             x, y, i = numberify(line.split(","))
-            i -= 1  # To compensate for IDs starting at 1 in the CSV file
-            cells[i].loc = (x, y)
+            cells[i-1].loc = (x, y)
 
 
 def load_data(path):
