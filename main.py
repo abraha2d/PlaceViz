@@ -12,6 +12,7 @@ from PySide2.QtCore import (
     QAbstractListModel,
     QModelIndex,
     QObject,
+    Qt,
     QUrl,
     Signal,
     Slot,
@@ -89,7 +90,9 @@ class Controller(QObject):
             path = wrapper._benchmark['path']
 
         if path:
+            app.setOverrideCursor(Qt.WaitCursor)
             result = load_data(path)
+            app.restoreOverrideCursor()
 
             if result[0] == -1:
                 QMessageBox.critical(
@@ -116,8 +119,10 @@ class Controller(QObject):
 
             else:
                 placement = result[1]
+                app.setOverrideCursor(Qt.WaitCursor)
                 pw = PlacementWindow(placement)
                 pw.show()
+                app.restoreOverrideCursor()
 
 
 if __name__ == "__main__":

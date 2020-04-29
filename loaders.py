@@ -134,7 +134,7 @@ def load_data(path):
             f"An error occured while parsing the .csv file.\n\n{repr(e)}",
         )
 
-    placement = Placement(cells, core, nets, num_io_cells)
+    placement = Placement(path, cells, core, nets, num_io_cells)
     return (0, placement)
 
 

@@ -50,7 +50,8 @@ class Placement:
     core = None             # CORE object
     nets = None             # List of nets
 
-    def __init__(self, cells, core, nets, num_io_cells):
+    def __init__(self, path, cells, core, nets, num_io_cells):
+        self.path = path
         self.cells = cells
         self.core = core
         self.nets = nets
