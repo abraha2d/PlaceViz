@@ -24,6 +24,7 @@ from PySide2.QtWidgets import (
     QMessageBox,
 )
 
+from PlacementWindow import PlacementWindow
 from loaders import get_benchmarks, load_data
 
 
@@ -115,7 +116,6 @@ class Controller(QObject):
 
             else:
                 placement = result[1]
-                from PlacementWindow import PlacementWindow
                 pw = PlacementWindow(placement)
                 pw.show()
 
