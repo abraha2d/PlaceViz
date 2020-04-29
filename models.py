@@ -6,6 +6,7 @@ class Cell:
     width = None            # Cell width (μm)
     height = None           # Cell height (μm)
     power = None            # Cell power (μW)
+    loc = None              # (x, y) (snapped to the nearest standard cell row)
 
     def __init__(self, id, cell_data):
         self.id = id
@@ -14,7 +15,6 @@ class Cell:
 
 class IOCell(Cell):
     loc_pref = None         # Preferred (x, y) boundary location
-    actual_loc = None       # Location snapped to the nearest standard cell row
 
     def __init__(self, cell, loc_pref):
         self.id = cell.id

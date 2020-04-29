@@ -1,9 +1,9 @@
 # This Python file uses the following encoding: utf-8
-import numpy as np
 from os.path import basename
 
 from PySide2.QtWidgets import (
     QMainWindow,
+    QMessageBox,
     QVBoxLayout,
     QWidget,
 )
@@ -18,7 +18,10 @@ from matplotlib.figure import Figure
 class PlacementWindow(QMainWindow):
     def __init__(self, placement):
         super().__init__()
+
         self.placement = placement
+        self.cellsWithoutLoc = []
+
         self.initializeWindow()
         self.initializePlot()
 
@@ -33,7 +36,21 @@ class PlacementWindow(QMainWindow):
         self.layout.addWidget(static_canvas)
         self.addToolBar(NavigationToolbar(static_canvas, self))
 
-        t = np.linspace(0, 10, 501)
         static_axes = static_canvas.figure.subplots()
-        static_axes.plot(t, np.tan(t), ".")
+        for cell in self.placement.cells:
+            try:
+                x, y = cell.loc
+                w, h = cell.width, cell.height
+                xs = [x, x, x+w, x+w, x]
+                ys = [y, y+h, y+h, y, y]
+                static_axes.plot(xs, ys, color='blue', linewidth=0.5)
+            except TypeError:
+                self.cellsWithoutLoc.append(cell.id)
 
+        if len(self.cellsWithoutLoc) > 0:
+            QMessageBox.warning(
+                None,
+                "Warning",
+                "The following cells did not have a placement:\n"
+                f"\n{self.cellsWithoutLoc}",
+            )

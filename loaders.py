@@ -84,7 +84,7 @@ def parse_csv(csv_file, cells):
         for line in csv:
             x, y, i = numberify(line.split(","))
             i -= 1  # To compensate for IDs starting at 1 in the CSV file
-            cells[i].actual_loc = (x, y)
+            cells[i].loc = (x, y)
 
 
 def load_data(path):
