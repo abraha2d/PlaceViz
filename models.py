@@ -49,18 +49,16 @@ class Core:
 
 
 class Placement:
-    num_io_cells = None     # Number of I/O cells
-
     cells = None            # List of cells
     core = None             # CORE object
     nets = None             # List of nets
 
-    def __init__(self, path, cells, core, nets, num_io_cells):
+    def __init__(self, path, csvPath, cells, core, nets):
         self.path = path
+        self.csvPath = csvPath
         self.cells = cells
         self.core = core
         self.nets = nets
-        self.num_io_cells = num_io_cells
 
 
 # if__name__ == "__main__":

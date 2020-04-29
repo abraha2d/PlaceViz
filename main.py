@@ -92,44 +92,31 @@ class Controller(QObject):
                 "Select placement engine output directory",
                 dirname(__file__),
             )
-            print(outputPath)
         else:
             path = wrapper._benchmark['path']
+            outputPath = dirname(path)
 
-        if path:
+        if path and outputPath:
             app.setOverrideCursor(Qt.WaitCursor)
-            result = load_data(path)
+            results = load_data(path, outputPath)
             app.restoreOverrideCursor()
 
-            if result[0] == -1:
+            if results[0] == -1:
                 QMessageBox.critical(
                     None,
                     f"{basename(path)}",
-                    f"Could not load benchmark.\n\nReason: {result[1]}",
+                    f"Could not load benchmark.\n\nReason: {results[1]}",
                 )
-
-            elif result[0] == -2:
-                run_placement = QMessageBox.question(
-                    None,
-                    f"{basename(path)}",
-                    "This benchmark has not been placed yet.\n"
-                    "\nWould you like to run placement?",
-                )
-
-                if run_placement == QMessageBox.StandardButton.Yes:
-                    # TODO: Run placement
-                    QMessageBox.critical(
-                        None,
-                        "Error",
-                        "This function has not been implemented yet.",
-                    )
 
             else:
-                placement = result[1]
+                placements = results[1]
                 app.setOverrideCursor(Qt.WaitCursor)
-                self.pw = PlacementWindow(placement, app)
-                self.pw.show()
-                self.pw.plot()
+                self.pws = []
+                for placement in placements:
+                    pw = PlacementWindow(placement, app)
+                    pw.show()
+                    pw.plot()
+                    self.pws.append(pw)
                 app.restoreOverrideCursor()
 
 

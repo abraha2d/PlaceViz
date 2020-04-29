@@ -15,6 +15,8 @@ from matplotlib.backends.backend_qt5agg import (
 )
 from matplotlib.figure import Figure
 
+from loaders import get_placement_details
+
 
 class PlacementWindow(QMainWindow):
     def __init__(self, placement, app):
@@ -30,7 +32,7 @@ class PlacementWindow(QMainWindow):
     def initializeWindow(self):
         self._main = QWidget()
         self.setCentralWidget(self._main)
-        self.setWindowTitle(basename(self.placement.path))
+        self.setWindowTitle(get_placement_details(self.placement.csvPath))
         self.layout = QVBoxLayout(self._main)
 
     def initializePlot(self):
@@ -64,6 +66,11 @@ class PlacementWindow(QMainWindow):
             for edge, weight in edges:
                 if weight > self.placement.core.width / 2:
                     self.app.processEvents()
+                    if (
+                        g.cells[edge[0]] in self.cellsWithoutLoc or
+                        g.cells[edge[1]] in self.cellsWithoutLoc
+                    ):
+                        continue
                     start_cell = self.placement.cells[g.cells[edge[0]]-1].cloc
                     end_cell = self.placement.cells[g.cells[edge[1]]-1].cloc
                     xs = [start_cell[0], end_cell[0]]
@@ -117,8 +124,11 @@ class Graph():
 
     @staticmethod
     def getCellDist(cell1, cell2):
-        x1, y1 = cell1.cloc
-        x2, y2 = cell2.cloc
+        try:
+            x1, y1 = cell1.cloc
+            x2, y2 = cell2.cloc
+        except TypeError:
+            return sys.maxsize - 1
         return ((y2-y1)**2+(x2-x1)**2)**0.5
 
     # A utility function to return the edges of the MST stored in parent[]

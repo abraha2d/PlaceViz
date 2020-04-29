@@ -1,4 +1,5 @@
 # This Python file uses the following encoding: utf-8
+from copy import deepcopy
 from glob import glob
 
 from os.path import (
@@ -32,11 +33,23 @@ def get_path(path, ext='hgr'):
     return f'{splitext(path)[0]}.{ext}'
 
 
+def get_benchmark_name(path):
+    return splitext(basename(path))[0]
+
+
+def get_placement_details(path):
+    nameparts = splitext(basename(path))[0].split('_')
+    benchmark = '_'.join(nameparts[0:-2])
+    mode = f'Mode {nameparts[-2]}'
+    algorithm = nameparts[-1].upper()
+    return f"{benchmark}, {mode}, {algorithm}"
+
+
 def get_benchmarks():
     return [{
-        'name': splitext(basename(path))[0],
+        'name': get_benchmark_name(path),
         'path': path,
-        'isPlaced': isfile(get_path(path, 'csv')),
+        'isPlaced': isfile(get_path(path, 'dim')),
     } for path in glob(BENCHMARK_GLOB)]
 
 
@@ -79,26 +92,25 @@ def parse_io(io_file, cells):
 
 def parse_csv(csv_file, cells):
     with open(csv_file) as csv:
-        csv.readline()
-
+        i = 0
         for line in csv:
-            x, y, i = numberify(line.split(","))
-            cells[i-1].loc = (x, y)
+            x, y, w = floatify(line.split(","))
+            cells[i].loc = (x, y)
+            i += 1
 
 
-def load_data(path):
+def load_data(path, outputPath):
     if not isfile(get_path(path, 'hgr')):
         return (-1, "Missing .hgr file")
 
     if not isfile(get_path(path, 'dim')):
         return (-1, "Missing .dim file")
 
-    io_present = True
-    if not isfile(get_path(path, 'io')):
-        io_present = False
+    benchmark_name = get_benchmark_name(path)
+    csv_files = glob(f'{outputPath}/{benchmark_name}_?_?fs.csv')
 
-    if not isfile(get_path(path, 'csv')):
-        return (-2, "Missing .csv file")
+    if len(csv_files) == 0:
+        return (-1, "No generated placement files (.csv) found")
 
     try:
         num_cells, nets = parse_hgr(get_path(path, 'hgr'))
@@ -116,32 +128,27 @@ def load_data(path):
             f"An error occured while parsing the .dim file.\n\n{repr(e)}",
         )
 
-    if io_present:
+    placements = []
+
+    for csv_file in csv_files:
+        placed_cells = deepcopy(cells)
         try:
-            num_io_cells = parse_io(get_path(path, 'io'), cells)
+            parse_csv(csv_file, placed_cells)
+        except IndexError:
+            return (
+                -1,
+                f"{basename(csv_file)} references non-existing cells."
+            )
         except Exception as e:
             return (
                 -1,
-                f"An error occured while parsing the .io file.\n\n{repr(e)}",
+                f"An error occured while parsing {basename(csv_file)}.\n"
+                f"\n{repr(e)}",
             )
-    else:
-        num_io_cells = 0
+        placement = Placement(path, csv_file, placed_cells, core, nets)
+        placements.append(placement)
 
-    try:
-        parse_csv(get_path(path, 'csv'), cells)
-    except IndexError:
-        return (-1, "The .csv file references non-existing cells.")
-    except Exception as e:
-        return (
-            -1,
-            f"An error occured while parsing the .csv file.\n\n{repr(e)}",
-        )
-
-    placement = Placement(path, cells, core, nets, num_io_cells)
-    return (
-        0 if io_present else -3,
-        placement,
-    )
+    return (0, placements)
 
 
 # if__name__ == "__main__":
