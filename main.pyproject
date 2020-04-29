@@ -1,3 +1,3 @@
 {
-    "files": ["models.py","main.py","utils.py","StartScreen.qml","loaders.py","qml/main.qml"]
+    "files": ["main.py","models.py","StartScreen.qml","utils.py","loaders.py","qml/main.qml","PlacementWindow.py"]
 }

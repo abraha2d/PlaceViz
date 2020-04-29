@@ -114,7 +114,10 @@ class Controller(QObject):
                     )
 
             else:
-                print(result[1])
+                placement = result[1]
+                from PlacementWindow import PlacementWindow
+                pw = PlacementWindow(placement)
+                pw.show()
 
 
 if __name__ == "__main__":
