@@ -3,6 +3,7 @@ from glob import glob
 
 from os.path import (
     basename,
+    dirname,
     isfile,
     join,
     splitext,
@@ -23,7 +24,7 @@ from utils import (
 )
 
 
-BENCHMARKS_DIR = 'benchmarks'
+BENCHMARKS_DIR = join(dirname(__file__), "benchmarks")
 BENCHMARK_GLOB = f'{BENCHMARKS_DIR}/*.hgr'
 
 
@@ -102,32 +103,40 @@ def load_data(path):
     try:
         num_cells, nets = parse_hgr(get_path(path, 'hgr'))
     except Exception as e:
-        return (-1, f"An error occured while parsing the .hgr file.\n\n{repr(e)}")
+        return (
+            -1,
+            f"An error occured while parsing the .hgr file.\n\n{repr(e)}",
+        )
 
     try:
         core, cells = parse_dim(get_path(path, 'dim'), num_cells)
     except Exception as e:
-        return (-1, f"An error occured while parsing the .dim file.\n\n{repr(e)}")
+        return (
+            -1,
+            f"An error occured while parsing the .dim file.\n\n{repr(e)}",
+        )
 
     try:
         num_io_cells = parse_io(get_path(path, 'io'), cells)
     except Exception as e:
-        return (-1, f"An error occured while parsing the .io file.\n\n{repr(e)}")
+        return (
+            -1,
+            f"An error occured while parsing the .io file.\n\n{repr(e)}",
+        )
 
     try:
         parse_csv(get_path(path, 'csv'), cells)
     except IndexError:
         return (-1, "The .csv file references non-existing cells.")
     except Exception as e:
-        return (-1, f"An error occured while parsing the .csv file.\n\n{repr(e)}")
+        return (
+            -1,
+            f"An error occured while parsing the .csv file.\n\n{repr(e)}",
+        )
 
     placement = Placement(cells, core, nets, num_io_cells)
+    return (0, placement)
 
-    return (-1, str(placement))
 
-
-def load_benchmark(benchmark):
-    return load_data(join(BENCHMARKS_DIR, f'{benchmark}.hgr'))
-
-    # if__name__ == "__main__":
+# if__name__ == "__main__":
 #     pass

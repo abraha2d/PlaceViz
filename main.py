@@ -1,5 +1,10 @@
 # This Python file uses the following encoding: utf-8
-from os.path import basename
+from os.path import (
+    basename,
+    dirname,
+    join,
+)
+
 import sys
 
 from PySide2.QtCore import (
@@ -7,7 +12,6 @@ from PySide2.QtCore import (
     QAbstractListModel,
     QModelIndex,
     QObject,
-    QTimer,
     QUrl,
     Signal,
     Slot,
@@ -34,7 +38,7 @@ class BenchmarkWrapper(QObject):
     name = Property("QString", _name, notify=name_changed)
 
     def _path(self):
-        return self._benchmark['path']
+        return basename(self._benchmark['path'])
     path_changed = Signal()
     path = Property("QString", _path, notify=path_changed)
 
@@ -74,7 +78,6 @@ class Controller(QObject):
     @Slot(QObject)
     def benchmarkClicked(self, wrapper):
         if wrapper._benchmark.get('isOther', False):
-            print("Opening dialog for user to select benchmark...")
             path = QFileDialog.getOpenFileName(
                 None,
                 "Open benchmark",
@@ -98,7 +101,8 @@ class Controller(QObject):
                 run_placement = QMessageBox.question(
                     None,
                     f"{basename(path)}",
-                    "This benchmark has not been placed yet.\n\nWould you like to run placement?",
+                    "This benchmark has not been placed yet.\n"
+                    "\nWould you like to run placement?",
                 )
 
                 if run_placement == QMessageBox.StandardButton.Yes:
@@ -116,7 +120,7 @@ class Controller(QObject):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setApplicationName("PlaceViz")
-    app.setWindowIcon(QIcon("icon.png"))
+    app.setWindowIcon(QIcon(join(dirname(__file__), "icon.png")))
 
     engine = QQmlApplicationEngine()
     rootContext = engine.rootContext()
@@ -128,6 +132,7 @@ if __name__ == "__main__":
     benchmarkList = BenchmarkListModel(benchmarks)
     rootContext.setContextProperty("benchmarkList", benchmarkList)
 
-    engine.load(QUrl("qml/main.qml"))
+    main_qml = join(dirname(__file__), "qml", "main.qml")
+    engine.load(QUrl(main_qml))
 
     sys.exit(app.exec_())

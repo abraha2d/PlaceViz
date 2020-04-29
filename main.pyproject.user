@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.2, 2020-04-11T15:23:16. -->
+<!-- Written by QtCreator 4.12.0, 2020-04-28T21:20:32. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -57,6 +57,16 @@
   <valuemap type="QVariantMap">
    <valuelist type="QVariantList" key="ClangCodeModel.CustomCommandLineKey"/>
    <value type="bool" key="ClangCodeModel.UseGlobalConfig">true</value>
+   <value type="QString" key="ClangCodeModel.WarningConfigId">Builtin.Questionable</value>
+   <valuemap type="QVariantMap" key="ClangTools">
+    <value type="bool" key="ClangTools.BuildBeforeAnalysis">true</value>
+    <value type="QString" key="ClangTools.DiagnosticConfig">Builtin.DefaultTidyAndClazy</value>
+    <value type="int" key="ClangTools.ParallelJobs">2</value>
+    <valuelist type="QVariantList" key="ClangTools.SelectedDirs"/>
+    <valuelist type="QVariantList" key="ClangTools.SelectedFiles"/>
+    <valuelist type="QVariantList" key="ClangTools.SuppressedDiagnostics"/>
+    <value type="bool" key="ClangTools.UseGlobalSettings">true</value>
+   </valuemap>
   </valuemap>
  </data>
  <data>
@@ -77,6 +87,8 @@
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.BuildSteps.Deploy</value>
     </valuemap>
     <value type="int" key="ProjectExplorer.BuildConfiguration.BuildStepListCount">1</value>
+    <valuemap type="QVariantMap" key="ProjectExplorer.DeployConfiguration.CustomData"/>
+    <value type="bool" key="ProjectExplorer.DeployConfiguration.CustomDataEnabled">false</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.DefaultDeployConfiguration</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.DeployConfigurationCount">1</value>
@@ -144,6 +156,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/main.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/main.py</value>
+    <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{332b2566-1588-45c8-8d02-0b05e234b410}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/main.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
@@ -155,7 +168,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default"></value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.1">
     <value type="QString" key="Analyzer.Perf.CallgraphMode">dwarf</value>
@@ -220,6 +233,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">models</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/models.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/models.py</value>
+    <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/models.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
@@ -296,6 +310,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">utils</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/utils.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/utils.py</value>
+    <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/utils.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
@@ -372,6 +387,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">loaders</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/loaders.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/loaders.py</value>
+    <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/loaders.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
@@ -406,6 +422,8 @@
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.BuildSteps.Deploy</value>
     </valuemap>
     <value type="int" key="ProjectExplorer.BuildConfiguration.BuildStepListCount">1</value>
+    <valuemap type="QVariantMap" key="ProjectExplorer.DeployConfiguration.CustomData"/>
+    <value type="bool" key="ProjectExplorer.DeployConfiguration.CustomDataEnabled">false</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.DefaultDeployConfiguration</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.DeployConfigurationCount">1</value>
@@ -473,8 +491,9 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/main.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/main.py</value>
+    <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{e4b1ea66-c73d-42d4-b403-33be688c2ff1}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script"></value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/main.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -549,8 +568,9 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">models</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/models.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/models.py</value>
+    <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script"></value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/models.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -625,8 +645,9 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">loaders</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/loaders.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/loaders.py</value>
+    <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script"></value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/loaders.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -701,8 +722,9 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">utils</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/utils.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/utils.py</value>
+    <value type="bool" key="PythonEditor.RunConfiguation.Buffered">false</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Interpreter"></value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script"></value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/kevin/Documents/Education/2020-02-Spring/ECE6133/Project/PlaceViz/utils.py</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
