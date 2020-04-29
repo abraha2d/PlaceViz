@@ -120,8 +120,9 @@ class Controller(QObject):
             else:
                 placement = result[1]
                 app.setOverrideCursor(Qt.WaitCursor)
-                pw = PlacementWindow(placement)
-                pw.show()
+                self.pw = PlacementWindow(placement, app)
+                self.pw.show()
+                self.pw.plot()
                 app.restoreOverrideCursor()
 
 
