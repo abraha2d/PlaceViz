@@ -24,6 +24,7 @@ from PySide2.QtWidgets import (
     QApplication,
     QFileDialog,
     QMessageBox,
+    QProgressDialog,
 )
 
 from PlacementWindow import PlacementWindow
@@ -110,13 +111,31 @@ class Controller(QObject):
 
             else:
                 placements = results[1]
-                app.setOverrideCursor(Qt.WaitCursor)
+
+                progress = QProgressDialog(
+                    labelText="Generating visualizations...",
+                    cancelButtonText=None,
+                    minimum=0,
+                    maximum=len(placements),
+                    flags=Qt.WindowStaysOnTopHint,
+                )
+                progress.setWindowTitle(f"{basename(path)}")
+                progress.setMinimumDuration(0)
+                progress.setValue(0)
+                progress.forceShow()
+                app.processEvents()
+
                 self.pws = []
                 for placement in placements:
+                    app.setOverrideCursor(Qt.WaitCursor)
+
                     pw = PlacementWindow(placement, app)
                     pw.show()
                     pw.plot()
                     self.pws.append(pw)
+
+                    progress.setValue(progress.value() + 1)
+                    app.processEvents()
                 app.restoreOverrideCursor()
 
 
