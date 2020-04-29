@@ -93,8 +93,9 @@ def load_data(path):
     if not isfile(get_path(path, 'dim')):
         return (-1, "Missing .dim file")
 
+    io_present = True
     if not isfile(get_path(path, 'io')):
-        return (-1, "Missing .io file")
+        io_present = False
 
     if not isfile(get_path(path, 'csv')):
         return (-2, "Missing .csv file")
@@ -115,13 +116,16 @@ def load_data(path):
             f"An error occured while parsing the .dim file.\n\n{repr(e)}",
         )
 
-    try:
-        num_io_cells = parse_io(get_path(path, 'io'), cells)
-    except Exception as e:
-        return (
-            -1,
-            f"An error occured while parsing the .io file.\n\n{repr(e)}",
-        )
+    if io_present:
+        try:
+            num_io_cells = parse_io(get_path(path, 'io'), cells)
+        except Exception as e:
+            return (
+                -1,
+                f"An error occured while parsing the .io file.\n\n{repr(e)}",
+            )
+    else:
+        num_io_cells = 0
 
     try:
         parse_csv(get_path(path, 'csv'), cells)
@@ -134,7 +138,10 @@ def load_data(path):
         )
 
     placement = Placement(path, cells, core, nets, num_io_cells)
-    return (0, placement)
+    return (
+        0 if io_present else -3,
+        placement,
+    )
 
 
 # if__name__ == "__main__":

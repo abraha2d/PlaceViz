@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # This Python file uses the following encoding: utf-8
 from os.path import (
     basename,
@@ -83,9 +84,15 @@ class Controller(QObject):
             path = QFileDialog.getOpenFileName(
                 None,
                 "Open benchmark",
-                "benchmarks/",
+                join(dirname(__file__), "benchmarks"),
                 "Benchmark files (*.hgr)"
             )[0]
+            outputPath = QFileDialog.getExistingDirectory(
+                None,
+                "Select placement engine output directory",
+                dirname(__file__),
+            )
+            print(outputPath)
         else:
             path = wrapper._benchmark['path']
 
