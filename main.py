@@ -88,11 +88,14 @@ class Controller(QObject):
                 join(dirname(__file__), "benchmarks"),
                 "Benchmark files (*.hgr)"
             )[0]
-            outputPath = QFileDialog.getExistingDirectory(
-                None,
-                "Select placement engine output directory",
-                dirname(__file__),
-            )
+            if path:
+                outputPath = QFileDialog.getExistingDirectory(
+                    None,
+                    "Select placement engine output directory",
+                    dirname(__file__),
+                )
+            else:
+                outputPath = None
         else:
             path = wrapper._benchmark['path']
             outputPath = dirname(path)
